@@ -343,7 +343,19 @@
         $scope.trackname = val.title;
         $scope.rating = val.rating;
         // hardcoded for now.
-        $scope.genres = [11];
+        
+        $scope.initGen = [];
+        
+        $scope.getGenId=function(genres){
+            console.log(genres);
+            angular.forEach(genres,function(val){
+                console.log("under for each",val);
+                $scope.initGen.push(val.id);
+            });
+            console.log($scope.initGen);
+            return $scope.initGen;
+        }
+        $scope.genres = $scope.getGenId(val.genres);
         $scope.hide = function() {
             $mdDialog.hide();
         };
