@@ -165,3 +165,8 @@ md-dialog >md-card.md-default-theme, md-card {
         max-height: 35em;
         overflow: auto;
     }    
+
+span.md-subhead p{
+width: 100%;
+text-align: left;
+}    

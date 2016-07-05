@@ -82,10 +82,13 @@
                                                     <md-card-title-text>
                                                         <!-- <span class="md-headline">{{track.id}}</span> -->
                                                         <span class="md-subhead">
-                                                        <p class="track_title">{{t.title}}</p><br>
-                                                        <p class="track_genres">[{{t.genres}}] </p>
-                                                        <p class="track_genres">[{{t.id}}] </p>
                                                         <p class="track_rating"> {{t.rating}}</p>
+                                                        <p class="track_title">{{t.title}}</p>
+
+
+                                                        <p class="track_genres" ng-repeat="genre in t.genres">{{genre.name}}</p>
+                                                        
+                                                        
                                                     </span>
                                                     </md-card-title-text>
                                                 </md-card-title>
