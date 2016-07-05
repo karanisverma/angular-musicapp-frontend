@@ -1,0 +1,10 @@
+               <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>Genre</label>
+                                                    <input ng-model="name">
+                                                </md-input-container>
+                                                <md-card-actions layout="row" layout-align="end center">
+                                                    <md-button ng-click="newGenre()">Save</md-button>
+                                                    <md-button ng-click="hide()">Close</md-button>
+                                                </md-card-actions>
+                                            </md-card>

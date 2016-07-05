@@ -1,0 +1,167 @@
+html,body{
+	background: #f64d3d;
+	overflow: hidden;
+}
+body{
+	zoom:75%;
+}
+.container{
+	width: 100%;
+	color: black;
+	padding: 0;
+
+}
+.marvel-device .screen{
+	background:white;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.mobile{
+	    margin: 0 auto;
+    width: 25em;
+    margin-top: 3em;
+}
+::-webkit-scrollbar {
+   width: 6px;
+}
+
+::-webkit-scrollbar-track {
+   /*-webkit-box-shadow: inset 0 0 6px white;*/
+}
+
+::-webkit-scrollbar-thumb {
+   /*-webkit-box-shadow: inset 0 0 6px black;*/
+   background: #d0d0d0 ;
+}
+
+md-pagination-wrapper{
+	margin: 0 auto;
+    position: relative;
+}
+
+md-input-container.md-block {
+    display: block;
+    text-align: left;
+}
+
+.md-padding{
+	padding: 10px;
+}
+
+input#input_4{
+	width: 78%;
+}
+
+.search_input {
+    padding-left: 1em;
+    padding-top: 9px;
+}
+
+button.md-raised.search_icon.md-button.md-ink-ripple{
+	min-width: 49px;
+	position: fixed;
+	top: 25px;
+	left: 16.6em;
+}
+
+md-card md-card-title{
+	padding: 14px 0px;
+}
+
+p.track_title{
+	float: left;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+p.track_genres{
+	float: left;
+    color: #5f5858;
+    font-size: 13px;
+    margin-top: 1px;
+}
+md-card.md-default-theme, md-card
+{
+	/*height: 7em;*/
+	/*background: blue;*/
+	margin:5px 0px;
+	width: 100%;
+}
+
+.md-button.md-default-theme.md-raised, .md-button.md-raised{
+	color: rgb(255, 64, 129);
+}
+/*md-tabs{
+	position: relative;
+	top:3em;
+	min-height: 30em;
+}
+md-tabs-wrapper{
+	position: fixed;
+    z-index: 9;
+    padding: 0 3em;
+
+}*/
+.popup{
+	/*position: fixed;
+	z-index: 4;
+	background:green;*/
+}
+.addTrack{
+    font-size: 3em;
+    height: 1.2em;
+    width: 1.2em;
+    z-index: 99;
+    line-height: 0;
+    border-radius: 100%;
+    border: 1px solid rgb(246, 77, 61);
+    overflow: hidden;
+    color: #922e24;
+    background: rgb(246, 77, 61);
+    box-shadow: 0 0 3px #605e5e;
+    text-align: center;
+    outline: none;
+}
+#leftButton{
+	left: -3em;
+}
+#rightButton{
+	right: -3em;
+}
+.navButton{
+	margin: .5em 0em;
+	position: relative;
+	font-size: 1.5em;
+	height: 1.5em;
+	width: 1.5em;
+	z-index: 99;
+	line-height: 0;
+	border-radius: 100%;
+	border: 1px solid rgb(246, 77, 61);
+	overflow: hidden;
+	color: #922e24;
+	background: rgb(246, 77, 61);
+	box-shadow: 0 0 3px #605e5e;
+	text-align: center;
+	outline: none;
+}
+.addTrackWrapper{
+	display: -webkit-inline-box;
+    position: relative;
+    top: .5em;
+}
+nav{ margin-bottom: 10%; }
+md-tab-content{
+	min-height: 30em;
+}
+md-dialog {
+    opacity: 0;
+    min-width: 300px;
+        left: -2px;
+    }
+
+md-dialog >md-card.md-default-theme, md-card {
+    padding: 3em 1em;
+        max-height: 35em;
+        overflow: auto;
+    }    

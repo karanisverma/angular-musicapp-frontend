@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html ng-app="music-app">
+
+<head>
+    <title>Music APP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS  -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Angular material css -->
+    <link rel="stylesheet" href="css/angular-material.min.css">
+    <!-- Device mokeup CSS -->
+    <link href="css/devices.min.css" rel="stylesheet">
+    <!-- Custom css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="mobile device">
+        <div class="marvel-device htc-one">
+            <div class="top-bar"></div>
+            <div class="camera"></div>
+            <div class="sensor"></div>
+            <div class="speaker"></div>
+            <div class="screen">
+                <!-- Content goes here -->
+                <div ng-cloak>
+                    <md-content>
+                        <md-tabs md-dynamic-height md-border-bottom>
+                            <md-tab label="Tracks">
+                                <md-content class="md-padding">
+                                    <div ng-controller="trackController as track" class="container">
+                                        <!-- Testing if everything is working fine -->
+                                        <div class="search_input">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Search</label>
+                                                <input ng-model="track.searchKeyword">
+                                                <md-button class="md-raised search_icon" ng-click="track.search()"><i class="fa fa-search" aria-hidden="true"></i></md-button>
+                                            </md-input-container>
+                                        </div>
+                                        <!-- <md-button class="md-raised" ng-click="track.search()">Search</md-button> -->
+                                        <!-- <button ng-click="track.allsongs()">Get Tracks</button> -->
+                                        <!-- <button ng-click="track.nextTrack()">Next </button>
+                                        <button ng-click="track.prevTrack()">Prev</button>
+                                        <br> -->
+                                        <!-- <button ng-click="track.showNewTrackForm()" class= "addTrack"><i class="fa fa-plus" aria-hidden="true"></i></button> -->
+                                        
+                                        <nav>
+                                            <button ng-click="track.prevTrack()" class ="navButton" id ="leftButton"><i class="fa fa-arrow-left" aria-hidden="true" ></i></button>
+                                            <div class="addTrackWrapper">
+                                            <button ng-click="track.showNewTrackForm()" class="addTrack">+</button>
+                                        </div>
+                                        <button ng-click="track.nextTrack()" class ="navButton" id="rightButton"><i class="fa fa-arrow-right" aria-hidden="true" ></i></button>
+                                        </nav>
+                                        <!-- -----------------------New track------------------------------ -->
+                                        <!-- -------------Edit track-------------- -->
+                                        <div ng-show="track.showEditTrack">
+                                            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>Title</label>
+                                                    <input ng-model="track.trackname">
+                                                </md-input-container>
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>Rating</label>
+                                                    <input ng-model="track.rating">
+                                                </md-input-container>
+                                                <md-input-container>
+                                                    <md-select placeholder="Select Genres" ng-model="user" md-on-open="track.loadGenres()" style="min-width: 200px;">
+                                                        <md-option ng-click="track.getId(gen.id)" ng-repeat="gen in track.allGenres">{{gen.name}}</md-option>
+                                                    </md-select>
+                                                </md-input-container>
+                                                <md-card-actions layout="row" layout-align="end center">
+                                                    <md-button ng-click="track.updateTrack(track.trackname,track.rating,track.genres,track.id)">Update</md-button>
+                                                    <md-button ng-click="track.hideEditTrackForm()">Close</md-button>
+                                                </md-card-actions>
+                                            </md-card>
+                                        </div>
+                                        <!-- ---------------------------------All tracks-------------------------------- -->
+                                        <div>
+                                            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch class="col-md-12" ng-repeat="t in track.trackList" ng-click="track.showEditTrackForm(t)">
+                                                <md-card-title>
+                                                    <md-card-title-text>
+                                                        <!-- <span class="md-headline">{{track.id}}</span> -->
+                                                        <span class="md-subhead">
+                                                        <p class="track_title">{{t.title}}</p><br>
+                                                        <p class="track_genres">[{{t.genres}}] </p>
+                                                        <p class="track_genres">[{{t.id}}] </p>
+                                                        <p class="track_rating"> {{t.rating}}</p>
+                                                    </span>
+                                                    </md-card-title-text>
+                                                </md-card-title>
+                                            </md-card>
+                                        </div>
+                                        <button ng-click="track.prevTrack()" class ="navButton" id ="leftButton"><i class="fa fa-arrow-left" aria-hidden="true" ></i></button>
+                                        <button ng-click="track.nextTrack()" class ="navButton" id="rightButton"><i class="fa fa-arrow-right" aria-hidden="true" ></i></button>
+                                    </div>
+                                </md-content>
+                            </md-tab>
+                            <md-tab label="Generes">
+                                <md-content class="md-padding">
+                                    <div ng-controller="genreController as genre" class="container">
+                                        <h1 class="md-display-2">Genere</h1>
+                                      <!--   <md-button class="md-raised" ng-click="genre.getGenres()">Show Genere</md-button> -->
+                                       <!--  <md-button class="md-raised" ng-click="genre.nextGen()">Next </md-button>
+                                        <md-button class="md-raised" ng-click="genre.prevGen()">Prev</md-button>
+                                        <md-button class="md-raised" ng-click="genre.showNewGenreForm()">New</md-button> -->
+
+                                        <nav>
+                                            <button ng-click="genre.prevGen()" class ="navButton" id ="leftButton"><i class="fa fa-arrow-left" aria-hidden="true" ></i></button>
+                                            <div class="addTrackWrapper">
+                                            <button ng-click="genre.showNewGenreForm()" class="addTrack">+</button>
+                                        </div>
+                                        <button ng-click="genre.nextGen()"" class ="navButton" id="rightButton"><i class="fa fa-arrow-right" aria-hidden="true" ></i></button>
+                                        </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <!-- -----------------------New track------------------------------ -->
+                                        <div ng-show="genre.showNewGenre">
+                                            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>wow!!</label>
+                                                    <input ng-model="track.trackname">
+                                                </md-input-container>
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>Rating</label>
+                                                    <input ng-model="track.rating">
+                                                </md-input-container>
+                                                <md-input-container>
+                                                    <md-select placeholder="Select Genres" ng-model="user" md-on-open="track.loadGenres()" style="min-width: 200px;">
+                                                        <md-option ng-click="track.getId(gen.id)" ng-repeat="gen in track.allGenres">{{gen.name}}</md-option>
+                                                        <md-button class="md-raised" ng-click="track.loadMore(track.allGenres)">Load more...</md-button>
+                                                    </md-select>
+                                                </md-input-container>
+                                                <md-card-actions layout="row" layout-align="end center">
+                                                    <md-button ng-click="track.saveNewTrack()">Save</md-button>
+                                                    <md-button ng-click="track.hideNewTrackForm()">Close</md-button>
+                                                </md-card-actions>
+                                            </md-card>
+                                        </div>
+                                        <!-- -----------------------Edit Genre------------------------------ -->
+                                        <div ng-show="genre.showEditGenre">
+                                            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                                                <md-input-container class="md-block" flex-gt-sm>
+                                                    <label>wow</label>
+                                                    <input ng-model="genre.name">
+                                                </md-input-container>
+                                                <md-card-actions layout="row" layout-align="end center">
+                                                    <md-button ng-click="genre.updateGenre(genre.id,genre.name)">Update</md-button>
+                                                    <md-button ng-click="genre.hideEditGenreForm()">Close</md-button>
+                                                </md-card-actions>
+                                            </md-card>
+                                        </div>
+                                        <!-- ---------------------------------All genere---->
+                                        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch class="col-md-10 col-md-offset-1" ng-repeat="g in genre.genreList">
+                                            <md-card-title>
+                                                <md-card-title-text>
+                                                    <span ng-click="genre.showEditGenreForm(g)" class="md-subhead">{{g.id}} {{g.name}}</span>
+                                                </md-card-title-text>
+                                            </md-card-title>
+                                            <md-card-actions layout="row" layout-align="end center">
+                                                <!-- <md-button onclick ="location.href"={{mobil.url}}>Go to website</md-button>-->
+                                            </md-card-actions>
+                                        </md-card>
+                                    </div>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- Angular.js -->
+<script src="js/angular.min.js"></script>
+<!-- Angular ng-resource -->
+<script src="js/angular-resource.min.js"></script>
+<!-- Angular animation -->
+<script src="js/angular-animate.min.js"></script>
+<script src="js/angular-aria.min.js"></script>
+<script src="js/angular-messages.min.js"></script>
+<!-- Angular Material Library -->
+<script src="js/angular-material.min.js"></script>
+<!-- Jquery Lib -->
+<script src="js/jquery2.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="js/jquery.min.js"></script>
+<!-- Bootstrap.js -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- This one is for router -->
+<script src="js/angular-route.min.js"></script>
+<!-- App.js for this app -->
+<script type="text/javascript" src="app.js"></script>
+
+</html>

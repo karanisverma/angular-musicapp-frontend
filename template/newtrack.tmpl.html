@@ -1,0 +1,22 @@
+<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Titlel</label>
+        <input ng-model="trackname">
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Ratinnng</label>
+        <input ng-model="rating">
+    </md-input-container>
+    <md-input-container>
+        <md-select placeholder="Select Genres" ng-model="user" md-on-open="loadGenres()" style="min-width: 200px;" multiple>
+            <md-optgroup label="Genres">
+                <md-option ng-repeat="gen in allGenres" ng-click="appandGenre(gen.id)">{{gen.name}}</md-option>
+            </md-optgroup>
+            <md-button class="md-raised" ng-click="loadMoreGenre(allGenres)">Load more...</md-button>
+        </md-select>
+    </md-input-container>
+    <md-card-actions layout="row" layout-align="end center">
+        <md-button ng-click="saveTrack()">Save</md-button>
+        <md-button ng-click="answer('not useful')">Close</md-button>
+    </md-card-actions>
+</md-card>
