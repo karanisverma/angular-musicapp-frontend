@@ -1,10 +1,13 @@
 <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
     <md-input-container class="md-block" flex-gt-sm>
-        <label>Titlel</label>
+        <label>Title</label>
         <input ng-model="trackname">
     </md-input-container>
+    <md-card-title-text>
+        <div star-rating ng-model="rating" ng-init="rating='0'" max="10" on-rating-select="rating.rateFunction(rating)"></div>
+    </md-card-title-text>
     <md-input-container class="md-block" flex-gt-sm>
-        <label>Ratinnng</label>
+        <label>Rating</label>
         <input ng-model="rating">
     </md-input-container>
     <md-input-container>
