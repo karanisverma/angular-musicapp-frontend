@@ -33,9 +33,9 @@
                                         <!-- Testing if everything is working fine -->
                                         <div class="search_input">
                                             <md-input-container class="md-block" flex-gt-sm>
-                                                <label>Search</label>
+                                                <label class="serch_lbl">Search</label>
                                                 <input ng-model="track.searchKeyword">
-                                                <md-button class="md-raised search_icon" ng-click="track.search()"><i class="fa fa-search" aria-hidden="true"></i></md-button>
+                                                <md-button class="md-raised search_icon" ng-click="track.search()"><i class="fa fa-search fa-2x" aria-hidden="true"></i></md-button>
                                             </md-input-container>
                                         </div>
                                         <!-- <md-button class="md-raised" ng-click="track.search()">Search</md-button> -->
@@ -85,8 +85,8 @@
                                                         <!-- <p class="track_rating"> {{t.rating}}</p> -->
 
 
-                                                          <div star-rating ng-model="t.rating" max="10" on-rating-select="rating.rateFunction(rating)"></div>
-                                                          <div><strong>Rating:</strong>  {{t.rating}}</div>
+                                                          
+                                                          
 
 
 
@@ -94,8 +94,8 @@
 
 
                                                         <p class="track_genres" ng-repeat="genre in t.genres">{{genre.name}}</p>
-                                                        
-                                                        
+                                                        <div star-rating ng-model="t.rating" max="10" on-rating-select="rating.rateFunction(rating)"></div>
+                                                        <div><strong>Rating:</strong>  {{t.rating}}</div>
                                                     </span>
                                                     </md-card-title-text>
                                                 </md-card-title>
