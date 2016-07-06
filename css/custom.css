@@ -152,6 +152,23 @@ md-tabs-wrapper{
 	text-align: center;
 	outline: none;
 }
+.navButton-disable{
+		color: white;
+	margin: .5em 0em;
+	position: relative;
+	font-size: 1.5em;
+	height: 1.5em;
+	width: 1.5em;
+	z-index: 99;
+	line-height: 0;
+	border-radius: 100%;
+	border: 1px solid #b8b8b8;
+	overflow: hidden;
+	box-shadow: 0 0 3px #605e5e;
+	text-align: center;
+	outline: none;
+	background: #b8b8b8;
+}
 .addTrackWrapper{
 	display: -webkit-inline-box;
     position: relative;
@@ -198,7 +215,7 @@ width: 100%;
 }
 
 .star-rating.readonly .star.filled {
-  color: #666;
+  color: #ff1002;
 }
 
 i.fa.fa-star:focus::before{

@@ -1,55 +1,62 @@
 (function() {
     var app = angular.module('music-app', ['ngMaterial', 'ngResource', 'ngRoute']);
-    
+
     app.directive('starRating', starRating);
 
-      function starRating() {
-    return {
-      restrict: 'EA',
-      template:
-        '<ul class="star-rating" ng-class="{readonly: readonly}">' +
-        '  <li ng-repeat="star in stars" class="star" ng-class="{filled: star.filled}" ng-click="toggle($index)">' +
-        '    <i class="fa fa-star"></i>' + // or &#9733
-        '  </li>' +
-        '</ul>',
-      scope: {
-        ratingValue: '=ngModel',
-        max: '=?', // optional (default is 5)
-        onRatingSelect: '&?',
-        readonly: '=?'
-      },
-      link: function(scope, element, attributes) {
-        if (scope.max == undefined) {
-          scope.max = 5;
-        }
-        function updateStars() {
-          scope.stars = [];
-          for (var i = 0; i < scope.max; i++) {
-            scope.stars.push({
-              filled: i < scope.ratingValue
-            });
-          }
+    function starRating() {
+        return {
+            restrict: 'EA',
+            template: '<ul class="star-rating" ng-class="{readonly: readonly}">' +
+                '  <li ng-repeat="star in stars" class="star" ng-class="{filled: star.filled}" ng-click="toggle($index)">' +
+                '    <i class="fa fa-star"></i>' + // or &#9733
+                '  </li>' +
+                '</ul>',
+            scope: {
+                ratingValue: '=ngModel',
+                max: '=?', // optional (default is 5)
+                onRatingSelect: '&?',
+                readonly: '=?'
+            },
+            link: function(scope, element, attributes) {
+                if (scope.max == undefined) {
+                    scope.max = 5;
+                }
+
+                function updateStars() {
+                    scope.stars = [];
+                    for (var i = 0; i < scope.max; i++) {
+                        scope.stars.push({
+                            filled: i < scope.ratingValue
+                        });
+                    }
+                };
+                scope.toggle = function(index) {
+                    if (scope.readonly == undefined || scope.readonly === false) {
+                        scope.ratingValue = index + 1;
+                        scope.onRatingSelect({
+                            rating: index + 1
+                        });
+                    }
+                };
+                scope.$watch('ratingValue', function(oldValue, newValue) {
+                    if (newValue) {
+                        updateStars();
+                    }
+                });
+            }
         };
-        scope.toggle = function(index) {
-          if (scope.readonly == undefined || scope.readonly === false){
-            scope.ratingValue = index + 1;
-            scope.onRatingSelect({
-              rating: index + 1
-            });
-          }
-        };
-        scope.$watch('ratingValue', function(oldValue, newValue) {
-          if (newValue) {
-            updateStars();
-          }
-        });
-      }
-    };
-  }
+    }
 
     app.service('musicAppService', ['$resource', function($resource) {
         this.getResource = function(url) {
             return $resource(url);
+        }
+        this.buttonStatus = function(link_type) {
+            if (link_type == null) {
+                return false;
+            } else {
+                return true;
+            }
         }
         this.init = function() {
             var init_url = "http://104.197.128.152:8000/v1/tracks";
@@ -97,11 +104,15 @@
             var genre = this;
             genre.showEditGenre = false;
             genre.showNewTrack = false;
+            genre.showNext = false;
+            genre.showPrev = false;
             var initGen_val = musicAppService.initGen_val;
             initGen_val.$promise.then(function(data) {
                 genre.genreList = initGen_val.results;
                 genre.next = initGen_val.next;
                 genre.prev = initGen_val.previous;
+                genre.showNext = musicAppService.buttonStatus(genre.next);
+                genre.showPrev = musicAppService.buttonStatus(genre.prev);
             });
             this.nextGen = function() {
                 console.log('next gen is clicked');
@@ -113,6 +124,8 @@
                         genre.genreList = val.results;
                         genre.next = val.next;
                         genre.prev = val.previous;
+                        genre.showNext = musicAppService.buttonStatus(genre.next);
+                        genre.showPrev = musicAppService.buttonStatus(genre.prev);
                     });
             }
             this.prevGen = function() {
@@ -124,6 +137,8 @@
                         genre.genreList = val.results;
                         genre.next = val.next;
                         genre.prev = val.previous;
+                        genre.showNext = musicAppService.buttonStatus(genre.next);
+                        genre.showPrev = musicAppService.buttonStatus(genre.prev);
                     });
             }
 
@@ -146,6 +161,8 @@
                         genre.genreList = refreshGen.results;
                         genre.next = refreshGen.next;
                         genre.prev = refreshGen.previous;
+                        genre.showNext = musicAppService.buttonStatus(genre.next);
+                        genre.showPrev = musicAppService.buttonStatus(genre.prev);
                     });
 
                 });
@@ -189,19 +206,25 @@
                     this.customFullscreen = (wantsFullScreen === true);
                 });
             };
-        }]);
+        }
+    ]);
 
     app.controller('trackController', ['$scope', '$resource', '$mdDialog',
         '$mdMedia', 'musicAppService',
         function($scope, $resource, $mdDialog, $mdMedia, musicAppService) {
             var track = this;
+            track.showNext = false;
+            track.showPrev = false;
             track.rating1 = 2;
             var init_val = musicAppService.init_val;
             init_val.$promise.then(function(data) {
                 track.trackList = init_val.results;
                 track.next = init_val.next;
                 track.prev = init_val.previous;
+                track.showNext = musicAppService.buttonStatus(track.next);
+                track.showPrev = musicAppService.buttonStatus(track.prev);
             });
+
 
 
             this.showEditTrackForm = function(trackProp, ev) {
@@ -252,7 +275,7 @@
                 });
             };
 
-            
+
             this.search = function() {
                 var url = 'http://104.197.128.152:8000/v1/tracks';
                 trackFactory = $resource(url);
@@ -270,6 +293,8 @@
                         track.trackList = val.results;
                         track.next = val.next;
                         track.prev = val.previous;
+                        track.showNext = musicAppService.buttonStatus(track.next);
+                        track.showPrev = musicAppService.buttonStatus(track.prev);
                     });
             }
             this.prevTrack = function() {
@@ -281,6 +306,8 @@
                         track.trackList = val.results;
                         track.next = val.next;
                         track.prev = val.previous;
+                        track.showNext = musicAppService.buttonStatus(track.next);
+                        track.showPrev = musicAppService.buttonStatus(track.prev);
                     });
             }
         }
@@ -289,8 +316,8 @@
         $scope.newGenre = function() {
             newGen_url = "http://104.197.128.152:8000/v1/genres";
             newGenResource = $resource(newGen_url);
-            newGenData = {name:$scope.name};
-            newGenResource.save(newGenData,function(){
+            newGenData = { name: $scope.name };
+            newGenResource.save(newGenData, function() {
                 console.log("you nailed it man!");
             });
             $mdDialog.hide();
@@ -343,13 +370,13 @@
         $scope.trackname = val.title;
         $scope.rating = val.rating;
         // hardcoded for now.
-        
+
         $scope.initGen = [];
-        
-        $scope.getGenId=function(genres){
+
+        $scope.getGenId = function(genres) {
             console.log(genres);
-            angular.forEach(genres,function(val){
-                console.log("under for each",val);
+            angular.forEach(genres, function(val) {
+                console.log("under for each", val);
                 $scope.initGen.push(val.id);
             });
             console.log($scope.initGen);
