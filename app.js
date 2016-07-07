@@ -91,11 +91,13 @@
 
         this.getGenreProperty = function() {
             console.log("Getting Genre property", this.GenreProperty);
-            return this.GenreProperty;
+            return this.genreProperty;
         }
-        this.setGenreProperty = function(property) {
+        this.setGenreProperty = function(property,results, index) {
             console.log("Setting Genre property", property);
-            this.GenreProperty = property;
+            this.genreProperty = property;
+            this.genreProperty.results = results;
+            this.genreProperty.index = index;            
         }
 
     }]);
@@ -177,8 +179,8 @@
             };
 
 
-            this.showEditGenreForm = function(genProp, ev) {
-                musicAppService.setGenreProperty(genProp);
+            this.showEditGenreForm = function(genProp,index, ev) {
+                musicAppService.setGenreProperty(genProp,genre.genreList,index);
                 console.log("under show  Edit form function");
                 var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && this.customFullscreen;
                 $mdDialog.show({
@@ -188,8 +190,9 @@
                     targetEvent: ev,
                     clickOutsideToClose: true,
                     fullscreen: useFullScreen
-                }).then(function(answer) {
-                    console.log("ok is pressed");
+                }).then(function(newResults) {
+                    genre.genreList = newResults;
+                    console.log("Done! Done! Done!");
                 }, function() {
                     var refreshGen = musicAppService.initGenre();
                     refreshGen.$promise.then(function(data) {
@@ -366,15 +369,17 @@
         $scope.name = genreVal.name;
         $scope.id = genreVal.id;
         $scope.update = function() {
+            if($scope.name) {
             editGenUrl = "http://104.197.128.152:8000/v1/genres/" + $scope.id;
             resourceGen = $resource(editGenUrl);
             editGenData = { id: $scope.id, name: $scope.name };
             console.log("sending data is ", editGenData);
             resourceGen.save(editGenData, function() {
                 console.log("changes have been made for genre you are awesome");
+                angular.copy(editGenData, genreVal.results[genreVal.index]);
             });
-            $mdDialog.hide();
-
+            $mdDialog.hide(genreVal.results);
+        }
         }
         $scope.hide = function() {
             $mdDialog.hide();
@@ -459,7 +464,7 @@
             console.log("Ready Edit data => ", editTrack);
             editTraRes.save(editTrack, function() {
                 console.log("done like a boss !!");
-                 angular.copy(data, val.results[parseInt(val.index)]);
+                 angular.copy(data, val.results[val.index]);
             });
             $mdDialog.hide(val.results);
         }
