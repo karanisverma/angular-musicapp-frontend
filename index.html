@@ -101,7 +101,7 @@
                                         
                                         <!-- All Track List -->
                                         <div>
-                                            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch class="col-md-12" ng-repeat="t in track.trackList" ng-click="track.showEditTrackForm(t)">
+                                            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch class="col-md-12" ng-repeat="t in track.trackList" ng-click="track.showEditTrackForm(t,$index)">
                                                 <md-card-title>
                                                     <md-card-title-text>
                                                         <span class="md-subhead">
@@ -215,10 +215,10 @@
                                             </md-button>
                                         </nav>
                                         <!-- ALL Genre List -->
-                                        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }} " md-theme-watch class="col-md-10 col-md-offset-1 " ng-repeat="g in genre.genreList ">
+                                        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }} " md-theme-watch class="col-md-10 col-md-offset-1 " ng-repeat="g in genre.genreList " ng-click="genre.showEditGenreForm(g)" >
                                             <md-card-title>
                                                 <md-card-title-text>
-                                                    <span ng-click="genre.showEditGenreForm(g) " class="md-subhead ">{{g.id}} {{g.name}}</span>
+                                                    <span class="md-subhead ">{{g.id}} {{g.name}}</span>
                                                 </md-card-title-text>
                                             </md-card-title>
                                         </md-card>
