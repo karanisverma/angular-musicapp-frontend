@@ -35,7 +35,7 @@
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label class="serch_lbl">Search</label>
                                                 <input ng-model="track.searchKeyword">
-                                                <md-button class="md-raised search_icon" ng-click="track.search()"><i class="fa fa-search fa-2x" aria-hidden="true"></i></md-button>
+                                                <md-button class="search_icon" ng-click="track.search()"><i class="fa fa-search fa-2x" aria-hidden="true"></i></md-button>
                                             </md-input-container>
                                         </div>
                                         <!-- <md-button class="md-raised" ng-click="track.search()">Search</md-button> -->
@@ -59,6 +59,7 @@
                                             aria-label="Eat cake" 
                                             id = "leftButton">
                                                 <md-icon md-svg-src="img/icons/l.svg"></md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>BACK</md-tooltip>
                                             </md-button>
 
                                             <md-button 
@@ -67,6 +68,7 @@
                                             aria-label="Eat cake" 
                                             id = "leftButton">
                                                 <md-icon md-svg-src="img/icons/l.svg"></md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>Dead END!</md-tooltip>
                                             </md-button>
                                             
                                             
@@ -75,6 +77,7 @@
                                             class="md-fab md-primary" 
                                             aria-label="Use Android">
                                                 <md-icon md-svg-src="img/icons/add-2.svg">+</md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs >ADD TRACK</md-tooltip>
                                             </md-button>
 
                                             <md-button
@@ -84,6 +87,7 @@
                                             aria-label="Eat cake" 
                                             id = "rightButton">
                                                 <md-icon md-svg-src="img/icons/r.svg"></md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>NEXT</md-tooltip>
                                             </md-button>
                                             <md-button
                                             ng-show="!track.showNext"
@@ -92,6 +96,7 @@
                                             aria-label="Eat cake" 
                                             id = "rightButton">
                                                 <md-icon md-svg-src="img/icons/r.svg"></md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>Dead END!</md-tooltip>
                                             </md-button>
                                         </nav>
                                         
@@ -104,13 +109,15 @@
                                                           <div star-rating ng-model="t.rating" max="10" on-rating-select="rating.rateFunction(rating)" readonly = "true"></div>
                                                           <div><strong>Rating:</strong>  {{t.rating}}</div>
                                                         <p class="track_title">{{t.title}}</p>
+                                                        <div class="genres_list">
                                                         <p class="track_genres" ng-repeat="genre in t.genres">{{genre.name}}</p>
+                                                        </div>
                                                     </span>
                                                     </md-card-title-text>
                                                 </md-card-title>
                                             </md-card>
                                         </div>
-                                         <nav>
+                                         <nav ng-show="track.showNav" >
                                             <md-button 
                                             ng-show="track.showPrev"
                                             ng-click="track.prevTrack()"
@@ -118,6 +125,7 @@
                                             aria-label="Eat cake" 
                                             id = "leftButton">
                                                 <md-icon md-svg-src="img/icons/l.svg"></md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>BACK</md-tooltip>
                                             </md-button>
 
                                             <md-button 
@@ -126,6 +134,7 @@
                                             aria-label="Eat cake" 
                                             id = "leftButton">
                                                 <md-icon md-svg-src="img/icons/l.svg"></md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>Dead END!</md-tooltip>
                                             </md-button>
 
                                             <md-button
@@ -135,6 +144,7 @@
                                             aria-label="Eat cake" 
                                             id = "rightButton">
                                                 <md-icon md-svg-src="img/icons/r.svg"></md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>NEXT</md-tooltip>
                                             </md-button>
 
                                             <md-button
@@ -144,15 +154,17 @@
                                             aria-label="Eat cake" 
                                             id = "rightButton">
                                                 <md-icon md-svg-src="img/icons/r.svg"></md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>Dead END!</md-tooltip>
                                             </md-button>
+                                            
                                         </nav>
                                     </div>
                                 </md-content>
                             </md-tab>
-                            <md-tab label="Generes">
+                            <md-tab label="Genres">
                                 <md-content class="md-padding">
                                     <div ng-controller="genreController as genre" class="container">
-                                        <h1 class="md-display-2">Genere</h1>
+                                        <h1 class="md-display-2">Genre</h1>
                                         <nav>
                                             <md-button 
                                             ng-show="genre.showPrev"
@@ -161,6 +173,7 @@
                                             aria-label="Eat cake" 
                                             id = "leftButton">
                                                 <md-icon md-svg-src="img/icons/l.svg"></md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>BACK</md-tooltip>
                                             </md-button>
 
                                             <md-button 
@@ -169,6 +182,7 @@
                                             aria-label="Eat cake" 
                                             id = "leftButton">
                                                 <md-icon md-svg-src="img/icons/l.svg"></md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>Dead END!</md-tooltip>
                                             </md-button>
                                             
                                             
@@ -177,6 +191,7 @@
                                             class="md-fab md-primary" 
                                             aria-label="Use Android">
                                                 <md-icon md-svg-src="img/icons/add-2.svg">+</md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>ADD GENRE</md-tooltip>
                                             </md-button>
 
                                             <md-button
@@ -186,6 +201,7 @@
                                             aria-label="Eat cake" 
                                             id = "rightButton">
                                                 <md-icon md-svg-src="img/icons/r.svg"></md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>NEXT</md-tooltip>
                                             </md-button>
                                             <md-button
                                             ng-show="!genre.showNext"
@@ -194,6 +210,7 @@
                                             aria-label="Eat cake" 
                                             id = "rightButton">
                                                 <md-icon md-svg-src="img/icons/r.svg"></md-icon>
+                                                <md-tooltip md-delay="1000" hide-xs>Dead END!</md-tooltip>
                                             </md-button>
                                         </nav>
                                         
@@ -203,7 +220,7 @@
                                         <div ng-show="genre.showNewGenre ">
                                             <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }} " md-theme-watch>
                                                 <md-input-container class="md-block " flex-gt-sm>
-                                                    <label>wow!!</label>
+                                                    <label>Genre</label>
                                                     <input ng-model="track.trackname ">
                                                 </md-input-container>
                                                 <md-input-container class="md-block " flex-gt-sm>
@@ -226,7 +243,7 @@
                                         <div ng-show="genre.showEditGenre ">
                                             <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }} " md-theme-watch>
                                                 <md-input-container class="md-block " flex-gt-sm>
-                                                    <label>wow</label>
+                                                    <label>Genre</label>
                                                     <input ng-model="genre.name ">
                                                 </md-input-container>
                                                 <md-card-actions layout="row " layout-align="end center ">

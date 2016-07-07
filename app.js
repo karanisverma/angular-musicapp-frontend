@@ -210,7 +210,7 @@
     ]);
 
     app.controller('trackController', ['$scope', '$resource', '$mdDialog',
-        '$mdMedia', 'musicAppService',
+        '$mdMedia', 'musicAppService', '$mdToast',
         function($scope, $resource, $mdDialog, $mdMedia, musicAppService) {
             var track = this;
             track.showNext = false;
@@ -253,9 +253,12 @@
                     clickOutsideToClose: true,
                     fullscreen: useFullScreen
                 }).then(function(answer) {
-                    console.log("ok is pressed");
+                    console.log("ook is pressed");
+                    $mdToast.show($mdToast.simple().textContent('Hello!'));    
                 }, function() {
                     console.log("cancel is pressed");
+
+ 
                 });
 
                 $scope.$watch(function() {
@@ -291,14 +294,18 @@
 
 
             this.search = function() {
+                if(track.searchKeyword){
                 var url = 'http://104.197.128.152:8000/v1/tracks';
                 track.showNav = false;
                 track.showClose = true;
+                
+                // console.log(track.searchKeyword);
                 trackFactory = $resource(url);
                 var entry = trackFactory.get({ title: track.searchKeyword }, function() {
                     console.log(entry);
                     track.trackList = entry.results;
                 });
+            }
             }
             this.nextTrack = function() {
                 var url = track.next;
@@ -385,8 +392,6 @@
         $scope.id = val.id;
         $scope.trackname = val.title;
         $scope.rating = val.rating;
-        // hardcoded for now.
-
         $scope.initGen = [];
 
         $scope.getGenId = function(genres) {
