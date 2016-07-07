@@ -215,6 +215,8 @@
             var track = this;
             track.showNext = false;
             track.showPrev = false;
+            track.showNav = true;
+            track.showClose = false;
             track.rating1 = 2;
             var init_val = musicAppService.init_val;
             init_val.$promise.then(function(data) {
@@ -226,7 +228,19 @@
             });
 
 
+            this.refresh = function(){
+                track.showClose = false;
+                track.showNav = true;
+            var init_val = musicAppService.init_val;
+            init_val.$promise.then(function(data) {
+                track.trackList = init_val.results;
+                track.next = init_val.next;
+                track.prev = init_val.previous;
+                track.showNext = musicAppService.buttonStatus(track.next);
+                track.showPrev = musicAppService.buttonStatus(track.prev);
+            });                
 
+            }
             this.showEditTrackForm = function(trackProp, ev) {
                 musicAppService.setTrackProperty(trackProp);
                 console.log("under show  Edit form function");
@@ -278,6 +292,8 @@
 
             this.search = function() {
                 var url = 'http://104.197.128.152:8000/v1/tracks';
+                track.showNav = false;
+                track.showClose = true;
                 trackFactory = $resource(url);
                 var entry = trackFactory.get({ title: track.searchKeyword }, function() {
                     console.log(entry);

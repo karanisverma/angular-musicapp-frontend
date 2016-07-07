@@ -261,3 +261,36 @@ md-pagination-wrapper{
 }
 
 }
+
+
+
+/*temp style for test */
+.md-button.md-default-theme.md-fab, .md-button.md-fab
+{
+	    background-color: rgb(246, 77, 61);
+}
+
+#rightButton md-icon{    position: relative;
+    left: .2em;
+    top: -0.1em;}
+
+#leftButton md-icon{
+    position: relative;
+    right: 0.1em;
+}    
+
+.md-button.md-default-theme.md-fab:not([disabled]):hover, .md-button.md-fab:not([disabled]):hover {
+    background-color: rgb(255, 21, 0);
+}
+.md-fab.md-mini.disabled{
+	 background-color: #efefef;
+}
+.md-fab.md-mini.disabled:hover, .md-fab.md-mini.disabled:focus, .md-fab.md-mini.disabled:visited{
+	 background-color: #efefef;
+}
+.closeButton{
+	position: relative;
+    left: 8em;
+    top: 0em;
+    min-width: 45px;
+}
