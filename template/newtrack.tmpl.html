@@ -4,11 +4,11 @@
         <input ng-model="trackname">
     </md-input-container>
     <md-card-title-text>
-        <div star-rating ng-model="rating" ng-init="rating='0'" max="10" on-rating-select="rating.rateFunction(rating)"></div>
+        <div star-rating ng-model="rating" ng-init="rating='0'" max="10"></div>
     </md-card-title-text>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Rating</label>
-        <input ng-model="rating">
+        <input ng-model="rating" type="number">
     </md-input-container>
     <md-input-container>
         <md-select placeholder="Select Genres" ng-model="user" md-on-open="loadGenres()" style="min-width: 200px;" multiple>
@@ -20,6 +20,6 @@
     </md-input-container>
     <md-card-actions layout="row" layout-align="end center">
         <md-button ng-click="saveTrack()">Save</md-button>
-        <md-button ng-click="answer('not useful')">Close</md-button>
+        <md-button ng-click="cancel()">Close</md-button>
     </md-card-actions>
 </md-card>

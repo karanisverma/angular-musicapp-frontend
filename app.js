@@ -1,8 +1,7 @@
 (function() {
     var app = angular.module('music-app', ['ngMaterial', 'ngResource', 'ngRoute']);
-
+    // directive for stra rating effect
     app.directive('starRating', starRating);
-
     function starRating() {
         return {
             restrict: 'EA',
@@ -46,6 +45,7 @@
             }
         };
     }
+
 
     app.service('musicAppService', ['$resource', function($resource) {
         this.getResource = function(url) {
@@ -176,11 +176,9 @@
 
 
             this.showEditGenreForm = function(genProp, ev) {
-                // console.log("Input showEditTrack form", trackProp);
                 musicAppService.setGenreProperty(genProp);
                 console.log("under show  Edit form function");
                 var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && this.customFullscreen;
-                // var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
                 $mdDialog.show({
                     controller: editGenreController,
                     templateUrl: 'template/editGenre.tmpl.html',
@@ -210,7 +208,7 @@
     ]);
 
     app.controller('trackController', ['$scope', '$resource', '$mdDialog',
-        '$mdMedia', 'musicAppService', '$mdToast',
+        '$mdMedia', 'musicAppService',
         function($scope, $resource, $mdDialog, $mdMedia, musicAppService) {
             var track = this;
             track.showNext = false;
@@ -254,7 +252,7 @@
                     fullscreen: useFullScreen
                 }).then(function(answer) {
                     console.log("ook is pressed");
-                    $mdToast.show($mdToast.simple().textContent('Hello!'));    
+                    
                 }, function() {
                     console.log("cancel is pressed");
 
@@ -356,7 +354,7 @@
             $mdDialog.hide(answer);
         };
 
-    }
+    }//closing controller
 
     function editGenreController($resource, $scope, $mdDialog, musicAppService) {
         genreVal = musicAppService.getGenreProperty();
@@ -384,14 +382,13 @@
             console.log("calling cancel function");
             $mdDialog.hide(answer);
         };
-    }
+    }//closing controller
 
     function editTrackController($resource, $scope, $mdDialog, musicAppService) {
         val = musicAppService.getTrackProperty();
-        // console.log(JSON.stringify(val));
         $scope.id = val.id;
         $scope.trackname = val.title;
-        $scope.rating = val.rating;
+        $scope.rating = parseInt(val.rating,10);
         $scope.initGen = [];
 
         $scope.getGenId = function(genres) {
@@ -410,10 +407,7 @@
         $scope.cancel = function() {
             $mdDialog.cancel();
         };
-        $scope.answer = function(answer) {
-            console.log("calling cancel function");
-            $mdDialog.hide(answer);
-        };
+
         $scope.loadGenres = function() {
             console.log("button is clicked!");
             var url = 'http://104.197.128.152:8000/v1/genres';
@@ -433,7 +427,6 @@
                 console.log("load more is successful!");
                 $scope.allGenres = old_gen;
                 console.log(val);
-                // console.log(old_gen);
                 $scope.allGenres.push.apply($scope.allGenres, val.results);
                 $scope.genresNext = val.next;
             });
@@ -460,7 +453,7 @@
             $mdDialog.hide();
         }
 
-    };
+    }; //closing controller
 
     function newTrackController($resource, $scope, $mdDialog) {
         $scope.genresArray = [];
@@ -469,10 +462,6 @@
         };
         $scope.cancel = function() {
             $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-            console.log("calling cancel function");
-            $mdDialog.hide(answer);
         };
         $scope.loadGenres = function() {
             console.log("button is clicked!");
@@ -493,7 +482,6 @@
                 console.log("load more is successful!");
                 $scope.allGenres = old_gen;
                 console.log(val);
-                // console.log(old_gen);
                 $scope.allGenres.push.apply($scope.allGenres, val.results);
                 $scope.genresNext = val.next;
             });
@@ -519,7 +507,7 @@
             });
             $mdDialog.hide();
         }
-    }
+    }//closing controller
 
 
 

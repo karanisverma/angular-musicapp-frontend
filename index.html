@@ -27,36 +27,35 @@
                 <div ng-cloak>
                     <md-content>
                         <md-tabs md-dynamic-height md-border-bottom>
+                        <!-- Track TAB  -->
                             <md-tab label="Tracks">
                                 <md-content class="md-padding">
                                     <div ng-controller="trackController as track" class="container">
-                                        <!-- Testing if everything is working fine -->
+                                        <!-- Search Input -->
                                         <div class="search_input">
                                             <md-input-container class="md-block" flex-gt-sm>
                                                 <label class="serch_lbl">Search</label>
                                                 <input ng-model="track.searchKeyword">
-                                                <md-button class="search_icon" ng-click="track.search()"><i class="fa fa-search fa-2x" aria-hidden="true"></i></md-button>
+                                                <md-button class="search_icon" ng-click="track.search()" aria-label="Search Track"><i class="fa fa-search fa-2x" aria-hidden="true"></i></md-button>
                                             </md-input-container>
                                         </div>
-                                        <!-- <md-button class="md-raised" ng-click="track.search()">Search</md-button> -->
-                                        <!-- <button ng-click="track.allsongs()">Get Tracks</button> -->
-                                        <!-- <button ng-click="track.nextTrack()">Next </button>
-                                        <button ng-click="track.prevTrack()">Prev</button>
-                                        <br> -->
-                                        <!-- <button ng-click="track.showNewTrackForm()" class= "addTrack"><i class="fa fa-plus" aria-hidden="true"></i></button> -->
+                                        <!-- Close Button -->
                                         <md-button
                                         ng-show="track.showClose"
                                         ng-click="track.refresh()"
                                         class="closeButton"
+                                        aria-label="Close Result"
                                         >
                                             <md-icon md-svg-src="img/icons/clear-button.svg"></md-icon>
                                         </md-button>
+
+                                        <!-- Navigation -->
                                         <nav ng-show="track.showNav">
                                             <md-button 
                                             ng-show="track.showPrev"
                                             ng-click="track.prevTrack()"
                                             class="md-fab md-mini" 
-                                            aria-label="Eat cake" 
+                                            aria-label="Back page" 
                                             id = "leftButton">
                                                 <md-icon md-svg-src="img/icons/l.svg"></md-icon>
                                                 <md-tooltip md-delay="1000" hide-xs>BACK</md-tooltip>
@@ -65,17 +64,17 @@
                                             <md-button 
                                             ng-show="!track.showPrev"
                                             class="md-fab md-mini disabled" 
-                                            aria-label="Eat cake" 
+                                            aria-label="Dead End" 
                                             id = "leftButton">
                                                 <md-icon md-svg-src="img/icons/l.svg"></md-icon>
-                                                <md-tooltip md-delay="1000" hide-xs>Dead END!</md-tooltip>
+                                                <md-tooltip md-delay="1000" hide-xs>END</md-tooltip>
                                             </md-button>
                                             
                                             
                                             <md-button 
                                             ng-click="track.showNewTrackForm()" 
                                             class="md-fab md-primary" 
-                                            aria-label="Use Android">
+                                            aria-label="Add track">
                                                 <md-icon md-svg-src="img/icons/add-2.svg">+</md-icon>
                                                 <md-tooltip md-delay="1000" hide-xs >ADD TRACK</md-tooltip>
                                             </md-button>
@@ -84,7 +83,7 @@
                                             ng-show="track.showNext"
                                             ng-click="track.nextTrack()"  
                                             class="md-fab md-mini" 
-                                            aria-label="Eat cake" 
+                                            aria-label="Next page" 
                                             id = "rightButton">
                                                 <md-icon md-svg-src="img/icons/r.svg"></md-icon>
                                                 <md-tooltip md-delay="1000" hide-xs>NEXT</md-tooltip>
@@ -93,14 +92,14 @@
                                             ng-show="!track.showNext"
                                               
                                             class="md-fab md-mini disabled" 
-                                            aria-label="Eat cake" 
+                                            aria-label="Dead End" 
                                             id = "rightButton">
                                                 <md-icon md-svg-src="img/icons/r.svg"></md-icon>
-                                                <md-tooltip md-delay="1000" hide-xs>Dead END!</md-tooltip>
+                                                <md-tooltip md-delay="1000" hide-xs>END</md-tooltip>
                                             </md-button>
                                         </nav>
                                         
-                                        <!-- ---------------------------------All tracks-------------------------------- -->
+                                        <!-- All Track List -->
                                         <div>
                                             <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch class="col-md-12" ng-repeat="t in track.trackList" ng-click="track.showEditTrackForm(t)">
                                                 <md-card-title>
@@ -117,6 +116,7 @@
                                                 </md-card-title>
                                             </md-card>
                                         </div>
+                                        <!-- Footer Navigation -->
                                          <nav ng-show="track.showNav" >
                                             <md-button 
                                             ng-show="track.showPrev"
@@ -134,7 +134,7 @@
                                             aria-label="Eat cake" 
                                             id = "leftButton">
                                                 <md-icon md-svg-src="img/icons/l.svg"></md-icon>
-                                                <md-tooltip md-delay="1000" hide-xs>Dead END!</md-tooltip>
+                                                <md-tooltip md-delay="1000" hide-xs>END</md-tooltip>
                                             </md-button>
 
                                             <md-button
@@ -154,17 +154,20 @@
                                             aria-label="Eat cake" 
                                             id = "rightButton">
                                                 <md-icon md-svg-src="img/icons/r.svg"></md-icon>
-                                                <md-tooltip md-delay="1000" hide-xs>Dead END!</md-tooltip>
+                                                <md-tooltip md-delay="1000" hide-xs>END</md-tooltip>
                                             </md-button>
                                             
                                         </nav>
                                     </div>
                                 </md-content>
                             </md-tab>
+
+                            <!-- Genre TAB -->
                             <md-tab label="Genres">
                                 <md-content class="md-padding">
                                     <div ng-controller="genreController as genre" class="container">
                                         <h1 class="md-display-2">Genre</h1>
+                                        <!-- Main navigation -->
                                         <nav>
                                             <md-button 
                                             ng-show="genre.showPrev"
@@ -182,10 +185,8 @@
                                             aria-label="Eat cake" 
                                             id = "leftButton">
                                                 <md-icon md-svg-src="img/icons/l.svg"></md-icon>
-                                                <md-tooltip md-delay="1000" hide-xs>Dead END!</md-tooltip>
+                                                <md-tooltip md-delay="1000" hide-xs>END</md-tooltip>
                                             </md-button>
-                                            
-                                            
                                             <md-button 
                                             ng-click="genre.showNewGenreForm()" 
                                             class="md-fab md-primary" 
@@ -210,58 +211,16 @@
                                             aria-label="Eat cake" 
                                             id = "rightButton">
                                                 <md-icon md-svg-src="img/icons/r.svg"></md-icon>
-                                                <md-tooltip md-delay="1000" hide-xs>Dead END!</md-tooltip>
+                                                <md-tooltip md-delay="1000" hide-xs>END</md-tooltip>
                                             </md-button>
                                         </nav>
-                                        
-
-
-                                        <!-- -----------------------New track------------------------------ -->
-                                        <div ng-show="genre.showNewGenre ">
-                                            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }} " md-theme-watch>
-                                                <md-input-container class="md-block " flex-gt-sm>
-                                                    <label>Genre</label>
-                                                    <input ng-model="track.trackname ">
-                                                </md-input-container>
-                                                <md-input-container class="md-block " flex-gt-sm>
-                                                    <label>Rating</label>
-                                                    <input ng-model="track.rating ">
-                                                </md-input-container>
-                                                <md-input-container>
-                                                    <md-select placeholder="Select Genres " ng-model="user " md-on-open="track.loadGenres() " style="min-width: 200px; ">
-                                                        <md-option ng-click="track.getId(gen.id) " ng-repeat="gen in track.allGenres ">{{gen.name}}</md-option>
-                                                        <md-button class="md-raised " ng-click="track.loadMore(track.allGenres) ">Load more...</md-button>
-                                                    </md-select>
-                                                </md-input-container>
-                                                <md-card-actions layout="row " layout-align="end center ">
-                                                    <md-button ng-click="track.saveNewTrack() ">Save</md-button>
-                                                    <md-button ng-click="track.hideNewTrackForm() ">Close</md-button>
-                                                </md-card-actions>
-                                            </md-card>
-                                        </div>
-                                        <!-- -----------------------Edit Genre------------------------------ -->
-                                        <div ng-show="genre.showEditGenre ">
-                                            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }} " md-theme-watch>
-                                                <md-input-container class="md-block " flex-gt-sm>
-                                                    <label>Genre</label>
-                                                    <input ng-model="genre.name ">
-                                                </md-input-container>
-                                                <md-card-actions layout="row " layout-align="end center ">
-                                                    <md-button ng-click="genre.updateGenre(genre.id,genre.name) ">Update</md-button>
-                                                    <md-button ng-click="genre.hideEditGenreForm() ">Close</md-button>
-                                                </md-card-actions>
-                                            </md-card>
-                                        </div>
-                                        <!-- ---------------------------------All genere---->
+                                        <!-- ALL Genre List -->
                                         <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }} " md-theme-watch class="col-md-10 col-md-offset-1 " ng-repeat="g in genre.genreList ">
                                             <md-card-title>
                                                 <md-card-title-text>
                                                     <span ng-click="genre.showEditGenreForm(g) " class="md-subhead ">{{g.id}} {{g.name}}</span>
                                                 </md-card-title-text>
                                             </md-card-title>
-                                            <md-card-actions layout="row " layout-align="end center ">
-                                                <!-- <md-button onclick ="location.href "={{mobil.url}}>Go to website</md-button>-->
-                                            </md-card-actions>
                                         </md-card>
                                     </div>
                                 </md-content>
